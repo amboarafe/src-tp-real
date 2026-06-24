@@ -1,8 +1,13 @@
 <?php
     include('../inc/functions.php');
-    $departments = get_all_departments();
+    
+    $current_sort = isset($_GET['sort']) ? $_GET['sort'] : 'asc';
+    
+    $next_sort = ($current_sort === 'asc') ? 'desc' : 'asc';
 
-?>		
+    $departments = get_all_departments($current_sort);
+    
+?>      
 <html>
     <head>
         <title>Les news</title>
@@ -25,17 +30,17 @@
             <th>Nombre d'employés</th>
             <th>Action</th>
         </tr>
-        <?php foreach ($departments as $line) {?>
+        <?php foreach ($departments as $line) { ?>
             <tr>
-                <td><a href="employees.php?dept_no=<?= urlencode($line['dept_no']) ?>"><?= $line['dept_no']?></a></td>
-                <td><?=$line['dept_name']?></td>
-                <td><?= $line['manager_name'] ?? '—' ?></td>
-                <td><?= $line['nb_employees'] ?></td>
+                <td><a href="employees.php?dept_no=<?= urlencode($line['dept_no']) ?>"><?= htmlspecialchars($line['dept_no']) ?></a></td>
+                <td><?= htmlspecialchars($line['dept_name']) ?></td>
+                <td><?= htmlspecialchars($line['manager_name'] ?? '—') ?></td>
+                <td><?= htmlspecialchars($line['nb_employees']) ?></td>
                 <td><a href="dept_form.php?dept_no=<?= urlencode($line['dept_no']) ?>">Éditer</a></td>
             </tr>
         <?php } ?>
         </table>
     </div>
-
+    <a href="index.php?sort=<? echo $next_sort ?>">Trier par nom (<? echo $next_sort ?>)</a>
     </body>
 </html>
