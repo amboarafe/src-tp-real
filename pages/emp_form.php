@@ -73,9 +73,11 @@
 <html>
     <head>
         <title><?= $editing ? "Modifier" : "Ajouter" ?> un employé</title>
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
     </head>
     <body>
-    <p><a href="index.php">&larr; Retour aux départements</a></p>
+        <div class="container">
+        <p><a href="index.php" class="btn">&larr; Retour aux départements</a></p>
     <h1><?= $editing ? "Modifier l'employé $emp_no" : "Ajouter un employé" ?></h1>
 
     <?php if ($success) { ?>
@@ -115,7 +117,8 @@
                 Est manager de ce département
             </label>
         </p>
-        <p><input type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>"></p>
+        <p><input type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>" class="btn"></p>
     </form>
+        </div>
     </body>
 </html>

@@ -24,44 +24,47 @@
 <html>
     <head>
         <title>Employés du département</title>
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
     </head>
     <body>
-    <p><a href="index.php">&larr; Retour aux départements</a></p>
+        <div class="container">
+        <p><a href="index.php" class="btn">&larr; Retour aux départements</a></p>
 
-    <?php if (!$department) { ?>
-        <h1>Département introuvable</h1>
-    <?php } else { ?>
-        <h1>Employés du département <?= $department['dept_name'] ?> (<?= $department['dept_no'] ?>)</h1>
-        <table border="1">
+<?php if (!$department) { ?>
+    <h1>Département introuvable</h1>
+<?php } else { ?>
+    <h1>Employés du département <?= $department['dept_name'] ?> (<?= $department['dept_no'] ?>)</h1>
+    <table border="1" class="table">
+        <tr>
+            <th>N°</th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Genre</th>
+            <th>Date d'embauche</th>
+        </tr>
+        <?php foreach ($employees as $emp) { ?>
             <tr>
-                <th>N°</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Genre</th>
-                <th>Date d'embauche</th>
+                <td><a href="fiche.php?emp_no=<?= urlencode($emp['emp_no']) ?>"><?= $emp['emp_no'] ?></a></td>
+                <td><?= $emp['first_name'] ?></td>
+                <td><?= $emp['last_name'] ?></td>
+                <td><?= $emp['gender'] ?></td>
+                <td><?= $emp['hire_date'] ?></td>
             </tr>
-            <?php foreach ($employees as $emp) { ?>
-                <tr>
-                    <td><a href="fiche.php?emp_no=<?= urlencode($emp['emp_no']) ?>"><?= $emp['emp_no'] ?></a></td>
-                    <td><?= $emp['first_name'] ?></td>
-                    <td><?= $emp['last_name'] ?></td>
-                    <td><?= $emp['gender'] ?></td>
-                    <td><?= $emp['hire_date'] ?></td>
-                </tr>
-            <?php } ?>
-        </table>
-        <p>
-            <?php if ($page > 1) { ?>
-                <a href="employees.php?dept_no=<?= urlencode($dept_no) ?>&page=<?= $page - 1 ?>">&larr; Précédent</a>
-            <?php } ?>
+        <?php } ?>
+    </table>
+    <p>
+        <?php if ($page > 1) { ?>
+            <a href="employees.php?dept_no=<?= urlencode($dept_no) ?>&page=<?= $page - 1 ?>" class="btn">&larr; Précédent</a>
+        <?php } ?>
 
-            Page <?= $page ?> / <?= $nb_pages ?>
+        Page <?= $page ?> / <?= $nb_pages ?>
 
-            <?php if ($page < $nb_pages) { ?>
-                <a href="employees.php?dept_no=<?= urlencode($dept_no) ?>&page=<?= $page + 1 ?>">Suivant &rarr;</a>
-            <?php } ?>
-        </p>
-        <p><?= $total ?> employé(s) au total dans ce département.</p>
-    <?php } ?>
+        <?php if ($page < $nb_pages) { ?>
+            <a href="employees.php?dept_no=<?= urlencode($dept_no) ?>&page=<?= $page + 1 ?>" class="btn">Suivant &rarr;</a>
+        <?php } ?>
+    </p>
+    <p><?= $total ?> employé(s) au total dans ce département.</p>
+<?php } ?>
+        </div>
     </body>
 </html>

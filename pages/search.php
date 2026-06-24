@@ -16,9 +16,11 @@
 <html>
     <head>
         <title>Recherche d'employés</title>
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
     </head>
     <body>
-    <p><a href="index.php">&larr; Retour aux départements</a></p>
+        <div class="container">
+        <p><a href="index.php" class="btn">&larr; Retour aux départements</a></p>
     <h1>Recherche d'employés</h1>
 
     <form method="get" action="search.php">
@@ -36,12 +38,12 @@
         <p>Nom de l'employé : <input type="text" name="name" value="<?= htmlspecialchars($name) ?>"></p>
         <p>Âge min : <input type="number" name="age_min" value="<?= htmlspecialchars($age_min) ?>"></p>
         <p>Âge max : <input type="number" name="age_max" value="<?= htmlspecialchars($age_max) ?>"></p>
-        <p><input type="submit" value="Rechercher"></p>
+        <p><input type="submit" value="Rechercher" class="btn"></p>
     </form>
 
     <?php if ($submitted) { ?>
         <h2><?= count($results) ?> résultat(s)<?= count($results) === 200 ? ' (limité à 200)' : '' ?></h2>
-        <table border="1">
+        <table border="1" class="table">
             <tr>
                 <th>N°</th>
                 <th>Prénom</th>
@@ -62,5 +64,6 @@
             <?php } ?>
         </table>
     <?php } ?>
+        </div>
     </body>
 </html>
